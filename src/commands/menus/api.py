@@ -248,9 +248,6 @@ def _api_provider_edit(provider_id: str):
         name = console.input(f"  [bold]{_('api.field_name')}[/bold] [dim]({defn.name}):[/dim] ").strip()
         base_url = console.input(f"  [bold]{_('api.field_base_url')}[/bold] [dim]({defn.base_url}):[/dim] ").strip()
         ptype = console.input(f"  [bold]{_('api.field_type')}[/bold] [dim]({defn.type}):[/dim] ").strip()
-        _cur_auth = "y" if defn.requires_auth else "n"
-        _auth_ans = console.input(f"  [bold]{_('api.field_api_key')} required?[/bold] [dim](y/n, current {_cur_auth}):[/dim] ").strip().lower()
-        requires_auth = (_auth_ans or _cur_auth) != "n"
         add_api_config(
             provider_id=provider_id,
             name=name or defn.name,
@@ -265,7 +262,6 @@ def _api_provider_edit(provider_id: str):
                 "output_price": m.output_price,
             } for m in defn.models],
             default_model=defn.default_model or "",
-            requires_auth=requires_auth,
         )
         reload_providers()
         console.print(f"  [green]\u2713[/green] {_('api.provider_updated')}")
@@ -456,15 +452,9 @@ def _api_add_menu():
         if not base_url:
             console.print(f"  [red]{_('api.url_required')}[/red]")
             return
-        import re as _re
-        _is_local = bool(_re.match(r'https?://(localhost|127\.0\.0\.1|0\.0\.0\.0)(:\d+)?(/|$)', base_url))
-        _default_auth = "n" if _is_local else "y"
-        _auth_ans = console.input(f"  [bold]{_('api.field_api_key')} required?[/bold] [dim](y/n, default {'n' if _is_local else 'y'}):[/dim] ").strip().lower()
-        requires_auth = (_auth_ans or _default_auth) != "n"
         add_api_config(
             provider_id=pid, name=name, base_url=base_url,
             provider_type="openai_compatible", api_format="openai",
-            requires_auth=requires_auth,
         )
         console.print(f"  [green]\u2713[/green] {_('api.added', name=name)}")
     except (KeyboardInterrupt, EOFError):
