@@ -50,3 +50,22 @@ def get_telegram_enabled() -> bool:
 
 def set_telegram_enabled(enabled: bool) -> None:
     set_value("telegram_enabled", bool(enabled))
+
+
+def get_oauth_token(provider: str) -> dict | None:
+    tokens = get("oauth_tokens", {})
+    if not isinstance(tokens, dict):
+        return None
+    return tokens.get(provider)
+
+
+def set_oauth_token(provider: str, token_data: dict) -> None:
+    tokens = dict(get("oauth_tokens", {}) or {})
+    tokens[provider] = token_data
+    set_value("oauth_tokens", tokens)
+
+
+def clear_oauth_token(provider: str) -> None:
+    tokens = dict(get("oauth_tokens", {}) or {})
+    tokens.pop(provider, None)
+    set_value("oauth_tokens", tokens)

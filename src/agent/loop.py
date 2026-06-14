@@ -732,6 +732,7 @@ async def run_agent_interactive(user_message, model=None, working_dir=None,
         msg = await build_first_message(
             user_message, ctx.working_dir, history=history,
             plan=ctx.plan,
+            include_system=False,
         )
 
     if session and not is_continuation:

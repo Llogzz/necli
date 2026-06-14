@@ -31,12 +31,23 @@ class CustomHttpProvider(BaseProvider):
             return ""
         return keys[0]
 
+    # provider_id → oauth provider name (for fallback when no API key is set)
+    _OAUTH_FALLBACK: Dict[str, str] = {"openai": "codex"}
+
     def _get_headers(self) -> Dict[str, str]:
         headers: Dict[str, str] = {"Content-Type": "application/json"}
         if self._default_headers:
             headers.update(self._default_headers)
         if self._requires_auth:
             key = self._get_api_key()
+            if not key:
+                # Fall back to OAuth access token for this provider
+                oauth_name = self._OAUTH_FALLBACK.get(self._definition_id)
+                if oauth_name:
+                    import config as _cfg
+                    oauth = _cfg.get_oauth_token(oauth_name)
+                    if oauth:
+                        key = oauth.get("access_token", "")
             if key:
                 prefix = (self._auth_prefix + " ") if self._auth_prefix else ""
                 headers[self._auth_header] = f"{prefix}{key}"

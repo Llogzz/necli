@@ -32,6 +32,7 @@ _DEFAULT_CONFIG: dict[str, object] = {
     # правая граница панелей съезжает влево. См. ui/_emoji_width.py.
     "emoji_width": 0,
     "language": "en",
+    "oauth_tokens": {},
 }
 
 _config_cache: dict | None = None
