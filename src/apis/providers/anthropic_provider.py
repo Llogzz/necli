@@ -47,15 +47,6 @@ class AnthropicProvider(BaseProvider):
         return f"{self._base_url.rstrip('/')}/v1/messages"
 
     def _get_headers(self) -> Dict[str, str]:
-        import config as _cfg
-        oauth = _cfg.get_oauth_token("claude")
-        if oauth and oauth.get("access_token"):
-            return {
-                "Authorization": f"Bearer {oauth['access_token']}",
-                "anthropic-version": _ANTHROPIC_VERSION,
-                "anthropic-beta": "oauth-2025-04-20",
-                "Content-Type": "application/json",
-            }
         return {
             "x-api-key": self._get_api_key(),
             "anthropic-version": _ANTHROPIC_VERSION,

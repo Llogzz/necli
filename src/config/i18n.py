@@ -144,17 +144,6 @@ EN: dict[str, str] = {
     "help.tool_format": "Toggle tool call format globally (native function calling ↔ fenced text blocks).",
 
     "help.lang": "Change interface language.",
-    "help.oauth": "Sign in via OAuth (Claude Code / OpenAI Codex).",
-
-    # oauth
-    "oauth.pick_provider": "Pick provider to sign in via OAuth",
-    "oauth.opening_browser": "— opening browser...",
-    "oauth.browser_hint": "Complete authorization in your browser, then return here.",
-    "oauth.timeout": "OAuth timed out — browser not completed in time.",
-    "oauth.error": "OAuth error: {msg}",
-    "oauth.no_token": "No access token received.",
-    "oauth.saved": "OAuth token saved for {provider}.",
-    "oauth.provider_label": "OAuth sign-in",
 
     # slash short messages
     "slash.nothing_to_compress": "Nothing to compress",
@@ -702,17 +691,6 @@ RU: dict[str, str] = {
     "help.tool_format": "Переключить формат вызова инструментов глобально (native function calling ↔ fenced text-блоки).",
 
     "help.lang": "Сменить язык интерфейса.",
-    "help.oauth": "Войти через OAuth (Claude Code / OpenAI Codex).",
-
-    # oauth
-    "oauth.pick_provider": "Выбери провайдера для входа через OAuth",
-    "oauth.opening_browser": "— открываю браузер...",
-    "oauth.browser_hint": "Авторизуйся в браузере, затем вернись сюда.",
-    "oauth.timeout": "OAuth тайм-аут — авторизация не завершена.",
-    "oauth.error": "Ошибка OAuth: {msg}",
-    "oauth.no_token": "Токен не получен.",
-    "oauth.saved": "OAuth токен сохранён для {provider}.",
-    "oauth.provider_label": "Вход через OAuth",
 
     "slash.nothing_to_compress": "Нечего сжимать",
     "slash.branch_empty": "Нечего ответвлять — чат пуст",
